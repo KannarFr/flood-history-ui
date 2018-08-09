@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Map, TileLayer, Marker, Popup, VideoOverlay } from 'react-leaflet'
 
+import 'leaflet/dist/leaflet.css'
+
 import Viewer from './Viewer'
 
 class FloodHistoryMap extends Component {
@@ -38,12 +40,8 @@ class FloodHistoryMap extends Component {
   
   render = () => {
     const position = [this.state.lat, this.state.lng]
-    const style = {
-      width: '400px',
-      height: '400px'
-    }
+
     return (
-      <div style={style}>
       <Map center={position} zoom={this.state.zoom}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -60,7 +58,6 @@ class FloodHistoryMap extends Component {
           url="https://www.mapbox.com/bites/00188/patricia_nasa.webm"
         />
       </Map>
-      </div>
     )
   }
 }
