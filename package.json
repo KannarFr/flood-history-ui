@@ -22,5 +22,11 @@
   "main": "index.js",
   "repository": "git@github.com:KannarFr/flood-history-ui.git",
   "author": "Alexandre DUVAL <alexanduval@wanadoo.fr>",
-  "license": "MIT"
+  "license": "MIT",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
