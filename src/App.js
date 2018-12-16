@@ -4,12 +4,12 @@ import Spinner from 'react-spinner'
 
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
-import { MenuItem } from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
 
 // components
 import Login from './components/login/Login'
@@ -69,12 +69,12 @@ const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
     <Drawer open={open} docked={"false"} onClick={() => handleToggleMenu()}>
       <img src={'/img/logo.jpeg'} className="logo" alt="logo" />
       {routes ? (
-        routes.map((route, index) => (
+        routes.map((route, index) =>
           route.isMenu ?
             <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ margin: 0, padding: 0}}>
               <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
             </MenuItem> : null
-        ))
+        )
       ) : (
         <div>Loading...</div>
       )}
@@ -96,11 +96,11 @@ const PublicRoute = ({ component: Component, login, ...rest }) => (
 const Main = ({ routes, token }, props) => (
   <div style={{}}>
     <Switch>
-      {routes.map((route, index) => (
+      {routes.map((route, index) =>
         route.isPublic ?
           <PublicRoute key={index} path={route.path} exact={route.exact} component={route.component} />
           : <PrivateRoute key={index} path={route.path} exact={route.exact} component={route.component} token={token} />
-      ))}
+      )}
     </Switch>
   </div>
 )
@@ -112,7 +112,7 @@ export default class App extends Component {
       routes: null,
       open: false,
       token: null
-    }	
+    }
   }
 
   componentWillMount = () => {

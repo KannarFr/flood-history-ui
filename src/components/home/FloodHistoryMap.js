@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker, Popup, VideoOverlay } from 'react-leaflet'
 
 import 'leaflet/dist/leaflet.css'
 
-import Viewer from './Viewer'
+//import Viewer from './Viewer'
 
 class FloodHistoryMap extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class FloodHistoryMap extends Component {
       markers: [],
       lat: 49.606059,
       lng: 0.901217,
-      zoom: 3,
+      zoom: 11,
     }
   }
 
@@ -42,7 +42,7 @@ class FloodHistoryMap extends Component {
     const position = [this.state.lat, this.state.lng]
 
     return (
-      <Map center={position} zoom={this.state.zoom}>
+      <Map id="map" center={position} zoom={this.state.zoom}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
