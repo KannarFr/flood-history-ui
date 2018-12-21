@@ -28,15 +28,10 @@ const navItemStyle = {
   height: '100%'
 }
 
-// layout
-const Root = (props) => (
-  <div style={{}} {...props}/>
-)
-
 const Header = ({ title, handleToggleMenu, logout, token }, props) => (
-  <div style={{}} {...props}>
+  <>
     {token ?
-      <AppBar>
+      <AppBar style={{position: "static"}}>
         <Toolbar>
           <IconButton color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
             <MenuIcon />
@@ -47,7 +42,7 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
           <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar> :
-      <AppBar>
+      <AppBar style={{position: "static"}}>
         <Toolbar>
           <IconButton color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
             <MenuIcon />
@@ -59,51 +54,43 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
         </Toolbar>
       </AppBar>
     }
-  </div>
+  </>
 )
 
 const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
-  <div style={{
-    textAlign: 'center'
-  }} {...props}>
+  <>
     <Drawer open={open} docked={"false"} onClick={() => handleToggleMenu()}>
       <img src={'/img/logo.jpeg'} className="logo" alt="logo" />
-      {routes ? (
+      {routes ?
         routes.map((route, index) =>
           route.isMenu ?
             <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ margin: 0, padding: 0}}>
               <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
             </MenuItem> : null
         )
-      ) : (
-        <div>Loading...</div>
-      )}
+        : <div>Loading...</div>
+      }
     </Drawer>
-  </div>
+  </>
 )
 
 // routing
-const PrivateRoute = ({ component: Component, token, ...rest }) => (
-  <Route {...rest} render={props => (
+const PrivateRoute = ({ component: Component, token, ...rest }) =>
+  <Route {...rest} render={props =>
     token ? <Component token={token} {...props} /> : <Redirect from='*' to='/login' />
-  )} />
-)
+  } />
 
-const PublicRoute = ({ component: Component, login, ...rest }) => (
+const PublicRoute = ({ component: Component, login, ...rest }) =>
   <Route {...rest} render={props => (<Component login={login} {...props} />)} />
-)
 
-const Main = ({ routes, token }, props) => (
-  <div style={{}}>
-    <Switch>
-      {routes.map((route, index) =>
-        route.isPublic ?
-          <PublicRoute key={index} path={route.path} exact={route.exact} component={route.component} />
-          : <PrivateRoute key={index} path={route.path} exact={route.exact} component={route.component} token={token} />
-      )}
-    </Switch>
-  </div>
-)
+const Main = ({ routes, token }, props) =>
+  <Switch>
+    {routes.map((route, index) =>
+      route.isPublic ?
+        <PublicRoute key={index} path={route.path} exact={route.exact} component={route.component} />
+        : <PrivateRoute key={index} path={route.path} exact={route.exact} component={route.component} token={token} />
+    )}
+  </Switch>
 
 export default class App extends Component {
   constructor(props) {
@@ -145,11 +132,11 @@ export default class App extends Component {
       token === undefined ?
         <Spinner /> :
         <Router>
-          <Root>
+          <>
             <Header title="SMBVAS" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
             <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
             <Main routes={routes} token={token} />
-          </Root>
+          </>
         </Router>
     )
   }

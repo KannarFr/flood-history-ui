@@ -42,7 +42,7 @@ class FloodHistoryMap extends Component {
     const position = [this.state.lat, this.state.lng]
 
     return (
-      <Map id="map" center={position} zoom={this.state.zoom}>
+      <Map center={position} zoom={this.state.zoom} styles={{height: "100%"}}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
