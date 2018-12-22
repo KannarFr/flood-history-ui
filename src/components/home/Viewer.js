@@ -19,6 +19,7 @@ export default class Viewer extends Component {
   render = () => {
     const { resource } = this.props
     const date = new Date(resource.creation_date * 1000)
+
     return (
       <Dialog
         open={this.state.open}

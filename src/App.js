@@ -29,32 +29,19 @@ const navItemStyle = {
 }
 
 const Header = ({ title, handleToggleMenu, logout, token }, props) => (
-  <>
-    {token ?
-      <AppBar style={{position: "static"}}>
-        <Toolbar>
-          <IconButton color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit">
-            { title }
-          </Typography>
-          <Button color="inherit">Logout</Button>
-        </Toolbar>
-      </AppBar> :
-      <AppBar style={{position: "static"}}>
-        <Toolbar>
-          <IconButton color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit">
-            { title }
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    }
-  </>
+  <AppBar style={{position: "static"}}>
+    <Toolbar>
+      <IconButton color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
+        <MenuIcon />
+      </IconButton>
+      <Typography variant="title" color="inherit">
+        { title }
+      </Typography>
+      {token ?
+        <Button color="inherit">Quitter le management</Button> : <Button color="inherit">Manager</Button>
+      }
+    </Toolbar>
+  </AppBar>
 )
 
 const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
@@ -133,7 +120,7 @@ export default class App extends Component {
         <Spinner /> :
         <Router>
           <>
-            <Header title="SMBVAS" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
+            <Header title="Centre Eau, Risque et Territoire" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
             <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
             <Main routes={routes} token={token} />
           </>
