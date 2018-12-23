@@ -8,37 +8,35 @@ import Dialog, {
 } from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
-export default class Viewer extends Component {
+class Viewer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       open: true
     }
+    console.log(this.props)
   }
   
   render = () => {
-    const { resource } = this.props
-    const date = new Date(resource.creation_date * 1000)
+    const { open } = this.state
+    const { uuid, hideViewer } = this.props
 
     return (
       <Dialog
-        open={this.state.open}
-        onClose={this.props.hideViewer}
+        open={open}
+        onClose={() => hideViewer()}
         fullScreen={true}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">{date.toString()}</DialogTitle>
+        aria-labelledby="responsive-dialog-title">
+        <DialogTitle id="responsive-dialog-title">{uuid}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <img alt={resource.path} src={resource.path} />
+          <DialogContentText>
+            Let Google help apps determine location. This means sending anonymous location data to
+            Google, even when no apps are running.
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={this.props.hideViewer} color="primary" autoFocus>
-            Ok!
-          </Button>
-        </DialogActions>
       </Dialog>
     )
   }
 }
+
+export default Viewer

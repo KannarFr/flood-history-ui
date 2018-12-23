@@ -19,7 +19,6 @@ class FloodHistoryMap extends Component {
     super(props)
     this.state = {
       resourceToShow: null,
-      isresourceshown: true,
       resources: [],
       lat: 49.606059,
       lng: 0.901217,
@@ -27,7 +26,7 @@ class FloodHistoryMap extends Component {
     }
   }
 
-  componentWillMount = () => {
+  /*componentWillMount = () => {
     fetch('http://localhost:9000/resources', {
       method: 'GET'
     }).then(res => {
@@ -37,15 +36,60 @@ class FloodHistoryMap extends Component {
         resources: resources,
       })
     })
+  }*/
+
+  componentWillMount = () => {
+    this.setState({
+      resources: [
+        {
+          "uuid": "1f5306ff-81a8-419d-a188-a79a8e5288a4",
+          "category": "image",
+          "lat": 49.6178,
+          "lng": 0.7552,
+          "creation_date": "1970-01-01T01:00:02.345+01:00[Europe/Paris]",
+          "edition_date": "1970-01-01T20:47:40.151+01:00[Europe/Paris]",
+          "validator": {
+            "uuid": "6fc29ce8-a3f4-4cab-b7eb-6ea8921e644e",
+            "email": "alexanduval@wanahahfr",
+            "password": "",
+            "creation_date": 1518279168
+          }
+        },
+        {
+          "uuid": "2f5306ff-81a8-419d-a188-a79a8e5288a4",
+          "category": "image",
+          "lat": 49.6178,
+          "lng": 0.7552,
+          "creation_date": "1970-01-01T01:00:02.345+01:00[Europe/Paris]",
+          "edition_date": "1970-01-01T21:28:36.514+01:00[Europe/Paris]",
+          "validator": {
+            "uuid": "6fc29ce8-a3f4-4cab-b7eb-6ea8921e644e",
+            "email": "alexanduval@wanahahfr",
+            "password": "",
+            "creation_date": 1518279168
+          }
+        },
+        {
+          "uuid": "3f5306ff-81a8-419d-a188-a79a8e5288a4",
+          "category": "image",
+          "lat": 49.6178,
+          "lng": 0.7552,
+          "creation_date": "1970-01-01T01:00:02.345+01:00[Europe/Paris]",
+          "edition_date": "1970-01-01T21:32:47.459+01:00[Europe/Paris]",
+          "validator": {
+            "uuid": "6fc29ce8-a3f4-4cab-b7eb-6ea8921e644e",
+            "email": "alexanduval@wanahahfr",
+            "password": "",
+            "creation_date": 1518279168
+          }
+        }
+      ]
+    })
   }
 
-  handleMarkerClick = (resource) => {
-    this.setState({ resourceToShow: resource })
-  }
+  handleMarkerClick = (resource) => this.setState({ resourceToShow: resource })
 
-  hideViewer = () => {
-    this.setState({ resourceToShow: null })
-  }
+  hideViewer = () => this.setState({ resourceToShow: null })
 
   render = () => {
     const position = [this.state.lat, this.state.lng]
@@ -69,7 +113,7 @@ class FloodHistoryMap extends Component {
           />
         </Map>
 
-        {resourceToShow ? <Viewer resource={resourceToShow} /> : null}
+        {resourceToShow ? <Viewer hideViewer={this.hideViewer} {...resourceToShow} /> : null}
       </>
     )
   }
