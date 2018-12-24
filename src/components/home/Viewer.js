@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 class Viewer extends Component {
   constructor(props) {
@@ -16,7 +13,7 @@ class Viewer extends Component {
     }
     console.log(this.props)
   }
-  
+
   render = () => {
     const { open } = this.state
     const { uuid, hideViewer } = this.props
