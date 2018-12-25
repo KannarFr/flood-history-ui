@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
+import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 
 class Viewer extends Component {
   constructor(props) {
@@ -24,6 +26,15 @@ class Viewer extends Component {
         onClose={() => hideViewer()}
         fullScreen={true}
         aria-labelledby="responsive-dialog-title">
+
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={this.handleClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
         <DialogTitle id="responsive-dialog-title">{uuid}</DialogTitle>
         <DialogContent>
           <DialogContentText>

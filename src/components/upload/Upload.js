@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 export default class Upload extends Component {
   render = () => {
     return (
-      <div>
-        <p>UPLOAD</p>
-      </div>
+      <>
+        <input type="file" />
+      </>
     )
   }
 }
