@@ -48,11 +48,7 @@ class Viewer extends Component {
         </DialogActions>
         <DialogTitle id="responsive-dialog-title">{uuid} - {date}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            <img src={url} alt={label} />
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
+          <img src={url} alt={label} />
         </DialogContent>
       </Dialog>
     )
