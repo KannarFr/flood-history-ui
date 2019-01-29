@@ -27,7 +27,7 @@ class FloodHistoryMap extends Component {
   }
 
   componentWillMount = () => {
-    fetch('http://localhost:9000/resources', {
+    fetch('http://localhost:9000/resources/validated', {
       method: 'GET'
     }).then(res => {
       return res.json()
@@ -55,7 +55,7 @@ class FloodHistoryMap extends Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {resources.map(resource =>
-            <Marker key={resource.uuid} position={[resource.lat, resource.lng]} onClick={() => this.handleMarkerClick(resource)} />
+            <Marker key={resource.id} position={[resource.lat, resource.lng]} onClick={() => this.handleMarkerClick(resource)} />
           )}
           <VideoOverlay
             bounds={[[32, -130], [13, -100]]}

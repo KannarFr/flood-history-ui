@@ -28,19 +28,18 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   }
 })
 
 function getSteps() {
   return [
-    'Informations',
+    'Informations sur la resource à envoyer',
     'Fichier'
   ]
 }
 
-function getStepContent(step, classes, handleDateChange, resourceDate) {
+function getStepContent(step, classes, handleChange, resourceDate) {
   switch (step) {
     case 0:
       return (
@@ -53,6 +52,7 @@ function getStepContent(step, classes, handleDateChange, resourceDate) {
             margin="normal"
             fullWidth
             variant="outlined"
+            onChange={(e) => handleChange('label', e.target.value)}
           />
           <TextField
             id="description"
@@ -61,6 +61,8 @@ function getStepContent(step, classes, handleDateChange, resourceDate) {
             fullWidth
             margin="normal"
             variant="outlined"
+            helperText="N'hésitez pas à renseigner la description. S'il manque des informations dans les autre champs, nous allons peut-être pouvoir les ajouter de notre côté."
+            onChange={(e) => handleChange('description', e.target.value)}
           />
           <Grid container justify="flex-start">
             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -68,29 +70,41 @@ function getStepContent(step, classes, handleDateChange, resourceDate) {
                 disableFuture={true}
                 margin="normal"
                 label="Date"
-                onChange={handleDateChange}
+                onChange={(date) => handleChange('date', date)}
                 value={resourceDate}
                 variant="outlined"
+                className={classes.textField}
+                format="dd/MM/yyyy"
+                mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
               />
             </MuiPickersUtilsProvider>
             <TextField
-              id="outlined-number"
+              id="latitude"
               label="Latitude"
-              //onChange={this.handleChange('age')}
               type="number"
               margin="normal"
               variant="outlined"
               className={classes.textField}
+              onChange={(e) => handleChange('latitude', parseFloat(e.target.value))}
             />
             <TextField
-              id="outlined-number"
+              id="longitude"
               label="Longitude"
-              //onChange={this.handleChange('age')}
               type="number"
               margin="normal"
               variant="outlined"
+              onChange={(e) => handleChange('longitude', parseFloat(e.target.value))}
             />
           </Grid>
+          <TextField
+            id="providerContact"
+            label="Adresse email ou téléphone"
+            placeholder="monadresse@email.fr ou 06 33 44 55 66"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            onChange={(e) => handleChange('providerContact', e.target.value)}
+          />
         </>
       )
     case 1:
@@ -103,9 +117,55 @@ function getStepContent(step, classes, handleDateChange, resourceDate) {
 
 class Upload extends Component {
   state = {
+    error: undefined,
     activeStep: 0,
-    description: '',
-    resourceDate: new Date()
+    currentResource: undefined
+  }
+
+  createResourceFromForm = () => {
+    let resourceToCreate = {
+      'label': this.state.label,
+      'description': this.state.description,
+      'date': this.state.date,
+      'lat': this.state.latitude,
+      'lng': this.state.longitude,
+      'providerContact': this.state.providerContact
+    }
+
+    fetch('http://localhost:9000/resources', {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      redirect: "follow",
+      referrer: "no-referrer",
+      body: JSON.stringify(resourceToCreate)
+    })
+    .then(response => {
+      if (response.status >= 200 && response.status <= 299) {
+        this.setState(
+          { currentResource: response.json(), error: null },
+           this.handleNext()
+        )
+      } else this.setState({ error: response.statusText })
+    })
+  }
+
+  uploadFileForResource = (resource) => () => {
+    fetch('http://localhost:9000/resources/' + resource.id + '/upload', {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      redirect: "follow",
+      referrer: "no-referrer",
+      body: JSON.stringify("lol")
+    })
+    .then(response => {
+      console.log(response.json())
+    })
   }
 
   handleNext = () => {
@@ -126,34 +186,44 @@ class Upload extends Component {
     })
   }
 
-  handleDateChange = date => {
-    this.setState({ resourceDate: date })
+  handleChange = (key, value) => {
+    this.setState({ [key]: value })
   }
 
   render = () => {
     const { classes } = this.props
     const steps = getSteps()
-    const { activeStep, resourceDate } = this.state
+    const { error, activeStep, resourceDate, currentResource } = this.state
+    console.log("yooo")
+    console.log(currentResource)
 
     return (
       <div className={classes.root}>
+        { error }
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => {
             return (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
                 <StepContent>
-                  {getStepContent(index, classes, this.handleDateChange, resourceDate)}
+                  {getStepContent(index, classes, this.handleChange, resourceDate)}
                   <div className={classes.actionsContainer}>
                     <div>
+                    {activeStep === steps.length - 1 ?
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={this.handleNext}
+                        onClick={this.uploadFileForResource(currentResource)}
                         className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Envoyer!' : 'Suivant'}
-                      </Button>
+                      >Envoyer</Button>
+                      :
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.createResourceFromForm}
+                        className={classes.button}
+                      >Suivant</Button>
+                    }
                     </div>
                   </div>
                 </StepContent>
@@ -163,7 +233,7 @@ class Upload extends Component {
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>Votre marqueur a été envoyé pour validation. Il fois validé il apparaitra sur la carte.</Typography>
+            <Typography>Votre marqueur a été envoyé pour vérification/validation. Il fois validé il apparaitra sur la carte.</Typography>
           </Paper>
         )}
       </div>
