@@ -12,27 +12,14 @@ class Viewer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: true,
-      url: null
+      open: true
     }
-    console.log(this.props)
-  }
-
-  componentWillMount = () => {
-    fetch('http://localhost:9000/resources/' + this.props.uuid + '/file', {
-      method: 'GET'
-    }).then(res => {
-      return res.json()
-    }).then(file => {
-      this.setState({
-        url: file.url
-      })
-    })
+    console.log(props)
   }
 
   render = () => {
-    const { open, url } = this.state
-    const { uuid, date, label, hideViewer } = this.props
+    const { open } = this.state
+    const { id, url, date, label, hideViewer } = this.props
 
     return (
       <Dialog
@@ -46,7 +33,7 @@ class Viewer extends Component {
             <ClearIcon />
           </Fab>
         </DialogActions>
-        <DialogTitle id="responsive-dialog-title">{uuid} - {date}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{date} - {label}</DialogTitle>
         <DialogContent>
           <img src={url} alt={label} />
         </DialogContent>

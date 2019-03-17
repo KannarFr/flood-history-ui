@@ -11,8 +11,13 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
+import Input from '@material-ui/core/Input';
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers'
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import frLocale from 'date-fns/locale/fr';
 
@@ -108,7 +113,9 @@ function getStepContent(step, classes, handleChange, resourceDate) {
         </>
       )
     case 1:
-      return 'blabla'
+      return (
+        <Input id="fileToUpload" type="file"></Input>
+      )
     default:
       return 'Unknown step'
   }
@@ -117,9 +124,9 @@ function getStepContent(step, classes, handleChange, resourceDate) {
 
 class Upload extends Component {
   state = {
-    error: undefined,
+    status: undefined,
     activeStep: 0,
-    currentResource: undefined
+    currentResource: undefined,
   }
 
   createResourceFromForm = () => {
@@ -142,29 +149,34 @@ class Upload extends Component {
       referrer: "no-referrer",
       body: JSON.stringify(resourceToCreate)
     })
-    .then(response => {
-      if (response.status >= 200 && response.status <= 299) {
-        this.setState(
-          { currentResource: response.json(), error: null },
-           this.handleNext()
-        )
-      } else this.setState({ error: response.statusText })
+    .then((response) => {
+      return response.json()
+    }).then((resource) => {
+      this.setState(
+        { currentResource: resource },
+        this.handleNext
+      )
     })
   }
 
   uploadFileForResource = (resource) => () => {
+    const data = new FormData()
+    data.append('resource', document.getElementById("fileToUpload").files[0])
+
     fetch('http://localhost:9000/resources/' + resource.id + '/upload', {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
       redirect: "follow",
       referrer: "no-referrer",
-      body: JSON.stringify("lol")
+      body: data
     })
-    .then(response => {
-      console.log(response.json())
+    .then((response) => {
+      this.setState(
+        { currentResource: null, status: response.status },
+        this.handleReset
+      )
     })
   }
 
@@ -193,13 +205,23 @@ class Upload extends Component {
   render = () => {
     const { classes } = this.props
     const steps = getSteps()
-    const { error, activeStep, resourceDate, currentResource } = this.state
-    console.log("yooo")
-    console.log(currentResource)
+    const { activeStep, resourceDate, currentResource, status } = this.state
 
     return (
       <div className={classes.root}>
-        { error }
+        { status ?
+          <Dialog
+            open={true}
+            fullScreen={false}
+            onClose={() => this.setState({ status: undefined })}
+            aria-labelledby="responsive-dialog-title">
+
+            <DialogTitle id="responsive-dialog-title">Statut de l'ajout de votre ressource</DialogTitle>
+            <DialogContent>
+              { status >= 200 && status <= 299 ? "Ok" : "Erreur {status}" }
+            </DialogContent>
+          </Dialog> : <></>
+        }
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => {
             return (
