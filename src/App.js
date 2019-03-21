@@ -91,9 +91,9 @@ export default class App extends Component {
 
   componentWillMount = () => {
     const routes = [
-      { isMenu: true, isPublic: true, label: 'Map', exact: true, path: '/', component: Home },
-      { isMenu: true, isPublic: true, label: 'HowItWorks', exact: true, path: '/howitworks', component: HowItWorks },
-      { isMenu: true, isPublic: true, label: 'Upload', exact: true, path: '/upload', component: Upload },
+      { isMenu: true, isPublic: true, label: 'Carte', exact: true, path: '/', component: Home },
+      { isMenu: true, isPublic: true, label: 'Comment ça fonctionne ?', exact: true, path: '/howitworks', component: HowItWorks },
+      { isMenu: true, isPublic: true, label: 'Ajouter une photo ou une vidéo', exact: true, path: '/upload', component: Upload },
       { isMenu: false, isPublic: true, label: 'Connection', path: '/login', component: Login }
     ]
 
