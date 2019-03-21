@@ -51,9 +51,9 @@ const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
       {routes ?
         routes.map((route, index) =>
           route.isMenu ?
-            <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ margin: 0, padding: 0}}>
-              <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
-            </MenuItem> : null
+          <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ margin: 0, padding: 0}}>
+            <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
+          </MenuItem> : null
         )
         : <div>Loading...</div>
       }
@@ -120,7 +120,7 @@ export default class App extends Component {
         <Spinner /> :
         <Router>
           <>
-            <Header title="Centre Eau, Risque et Territoire" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
+            <Header title="Photothèque des inondations" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
             <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
             <Main routes={routes} token={token} />
           </>
