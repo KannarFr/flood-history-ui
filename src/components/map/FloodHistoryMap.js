@@ -34,7 +34,7 @@ class FloodHistoryMap extends Component {
   }
 
   componentWillMount = () => {
-    fetch('http://localhost:9000/resources/validated', {
+    fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources/validated', {
       method: 'GET'
     }).then(res => {
       return res.json()
