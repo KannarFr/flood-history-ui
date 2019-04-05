@@ -139,7 +139,7 @@ class Upload extends Component {
       'providerContact': this.state.providerContact
     }
 
-    fetch('http://localhost:9000/resources', {
+    fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources', {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -163,7 +163,7 @@ class Upload extends Component {
     const data = new FormData()
     data.append('resource', document.getElementById("fileToUpload").files[0])
 
-    fetch('http://localhost:9000/resources/' + resource.id + '/upload', {
+    fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources/' + resource.id + '/upload', {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
