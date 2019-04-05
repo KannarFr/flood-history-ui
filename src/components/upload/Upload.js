@@ -218,7 +218,9 @@ class Upload extends Component {
 
             <DialogTitle id="responsive-dialog-title">Statut de l'ajout de votre ressource</DialogTitle>
             <DialogContent>
-              { status >= 200 && status <= 299 ? "Ok" : "Erreur {status}" }
+              <DialogContentText>
+                { status >= 200 && status <= 299 ? "Ok" : "Erreur {status}" }
+              </DialogContentText>
             </DialogContent>
           </Dialog> : <></>
         }
@@ -255,7 +257,7 @@ class Upload extends Component {
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>Votre marqueur a été envoyé pour vérification/validation. Il fois validé il apparaitra sur la carte.</Typography>
+            <Typography>Votre participation a été envoyé pour validation. Une fois validé elle apparaitra sur la carte.</Typography>
           </Paper>
         )}
       </div>

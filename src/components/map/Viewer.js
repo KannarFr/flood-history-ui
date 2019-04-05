@@ -19,7 +19,7 @@ class Viewer extends Component {
 
   render = () => {
     const { open } = this.state
-    const { id, url, date, label, hideViewer } = this.props
+    const { url, date, label, description, hideViewer } = this.props
 
     return (
       <Dialog
@@ -36,6 +36,9 @@ class Viewer extends Component {
         <DialogTitle id="responsive-dialog-title">{date} - {label}</DialogTitle>
         <DialogContent>
           <img src={url} alt={label} />
+          <DialogContentText>
+            {description}
+          </DialogContentText>
         </DialogContent>
       </Dialog>
     )
