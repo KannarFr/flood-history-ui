@@ -5,11 +5,12 @@ import Spinner from 'react-spinner'
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
 import MenuItem from '@material-ui/core/MenuItem'
-import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import SettingsIcon from '@material-ui/icons/Settings'
+import CloseIcon from '@material-ui/icons/Close'
 
 // components
 import Login from './components/login/Login'
@@ -41,7 +42,13 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
         { title }
       </Typography>
       {token ?
-        <Button color="inherit">Quitter le management</Button> : <Button color="inherit">Manager</Button>
+        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
+          <CloseIcon />
+        </IconButton>
+        :
+        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
+          <SettingsIcon />
+        </IconButton>
       }
     </Toolbar>
   </AppBar>
