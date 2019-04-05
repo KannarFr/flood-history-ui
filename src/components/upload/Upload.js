@@ -101,7 +101,29 @@ function getStepContent(step, classes, handleChange, resourceDate) {
               onChange={(e) => handleChange('longitude', parseFloat(e.target.value))}
             />
           </Grid>
+          <Grid container justify="flex-start">
+            <TextField
+              required
+              id="providerFirstName"
+              label="Prénom"
+              placeholder="Jean"
+              margin="normal"
+              variant="outlined"
+              className={classes.textField}
+              onChange={(e) => handleChange('providerFirstName', e.target.value)}
+            />
+            <TextField
+              required
+              id="providerLastName"
+              label="Nom"
+              placeholder="DUPONT"
+              margin="normal"
+              variant="outlined"
+              onChange={(e) => handleChange('providerLastName', e.target.value)}
+            />
+          </Grid>
           <TextField
+            required
             id="providerContact"
             label="Adresse email ou téléphone"
             placeholder="monadresse@email.fr ou 06 33 44 55 66"
