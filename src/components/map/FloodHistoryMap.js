@@ -69,32 +69,17 @@ class FloodHistoryMap extends Component {
             play={this.state.play}
             url="https://www.mapbox.com/bites/00188/patricia_nasa.webm"
           />
-          <WrappedLeafletZoomIndicator head='zoom:' position='topleft' />
+          <WrappedLeafletZoomIndicator head='zoom:' position='topright' />
           <WrappedLeafletSearchIndicator
             provider="OpenStreetMap"
             position="topleft"
-            inputPlaceholder="Custom placeholder"
-            search = {
-              [33.100745405144245, 46.48315429687501]
-            }
+            inputPlaceholder="Rechercher..."
             showMarker={true}
-            zoom={5}
+            zoom={10}
             showPopup={true}
             popUp={this.customPopup}
             closeResultsOnClick={true}
             openSearchOnLoad={true}
-            // // these searchbounds would limit results to only Turkey.
-            searchBounds = {
-              [
-                [33.100745405144245, 46.48315429687501],
-                [44.55916341529184, 24.510498046875]
-              ]
-            }
-            // providerOptions={{region: 'tr'}}
-
-            // default provider OpenStreetMap
-            // provider="BingMap"
-            // providerKey="AhkdlcKxeOnNCJ1wRIPmrOXLxtEHDvuWUZhiT4GYfWgfxLthOYXs5lUMqWjQmc27"
           />
         </Map>
 
