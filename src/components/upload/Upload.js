@@ -39,7 +39,7 @@ const styles = theme => ({
 
 function getSteps() {
   return [
-    'Informations sur la resource à envoyer',
+    'Informations sur la resource à envoyer (* : champ obligatoire)',
     'Fichier'
   ]
 }
@@ -52,7 +52,7 @@ function getStepContent(step, classes, handleChange, resourceDate) {
           <TextField
             required
             id="label"
-            label="Lieu"
+            label="Localisation de l'inondation"
             placeholder="213 Ancienne route de Villers, 74340, Villers-Ecalles"
             margin="normal"
             fullWidth
@@ -74,7 +74,7 @@ function getStepContent(step, classes, handleChange, resourceDate) {
               <DatePicker
                 disableFuture={true}
                 margin="normal"
-                label="Date"
+                label="Date de l'inondation"
                 onChange={(date) => handleChange('date', date)}
                 value={resourceDate}
                 variant="outlined"
