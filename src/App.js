@@ -34,7 +34,7 @@ const navItemStyle = {
 const Header = ({ title, handleToggleMenu, logout, token }, props) => (
   <AppBar style={{position: "static"}}>
     <Toolbar>
-      <IconButton color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
+      <IconButton style={{ marginLeft: -12, marginRight: 20 }} color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
         <MenuIcon />
       </IconButton>
       <Typography variant="title" color="inherit">
