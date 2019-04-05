@@ -75,7 +75,7 @@ class FloodHistoryMap extends Component {
             position="topleft"
             inputPlaceholder="Rechercher..."
             showMarker={true}
-            zoom={10}
+            zoom={11}
             showPopup={true}
             popUp={this.customPopup}
             closeResultsOnClick={true}
