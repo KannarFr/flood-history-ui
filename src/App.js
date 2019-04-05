@@ -61,11 +61,11 @@ const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
       {routes ?
         routes.map((route, index) =>
           route.isMenu ?
-          <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ margin: 0, padding: 0}}>
+          <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ display: "block" }}>
             <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
           </MenuItem> : null
         )
-        : <div>Loading...</div>
+        : <div>Chargement...</div>
       }
     </Drawer>
   </>
