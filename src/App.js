@@ -126,7 +126,7 @@ export default class App extends Component {
         <Spinner /> :
         <Router>
           <>
-            <Header title="Photothèque des inondations" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
+            <Header title="Les inondations de l'Austreberthe" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
             <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
             <Main routes={routes} token={token} />
           </>
