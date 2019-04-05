@@ -60,19 +60,6 @@ function getStepContent(step, classes, handleChange, resourceDate) {
             onChange={(e) => handleChange('label', e.target.value)}
           />
           <Grid container justify="flex-start">
-            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
-              <DatePicker
-                disableFuture={true}
-                margin="normal"
-                label="Date de l'inondation"
-                onChange={(date) => handleChange('date', date)}
-                value={resourceDate}
-                variant="outlined"
-                className={classes.textField}
-                format="dd/MM/yyyy"
-                mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
-              />
-            </MuiPickersUtilsProvider>
             <TextField
               id="latitude"
               label="Latitude"
@@ -91,6 +78,19 @@ function getStepContent(step, classes, handleChange, resourceDate) {
               onChange={(e) => handleChange('longitude', parseFloat(e.target.value))}
             />
           </Grid>
+          <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
+            <DatePicker
+              disableFuture={true}
+              margin="normal"
+              label="Date de l'inondation"
+              onChange={(date) => handleChange('date', date)}
+              value={resourceDate}
+              variant="outlined"
+              className={classes.textField}
+              format="dd/MM/yyyy"
+              mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
+            />
+          </MuiPickersUtilsProvider>
           <TextField
             id="description"
             label="Description"
