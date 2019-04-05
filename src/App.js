@@ -16,6 +16,9 @@ import Login from './components/login/Login'
 import Home from './components/home/Home'
 import HowItWorks from './components/howitworks/HowItWorks'
 import Upload from './components/upload/Upload'
+import LegalNotices from './components/legalnotices/LegalNotices'
+import Credits from './components/credits/Credits'
+import Contact from './components/contact/Contact'
 
 // styles
 const navItemStyle = {
@@ -92,8 +95,11 @@ export default class App extends Component {
   componentWillMount = () => {
     const routes = [
       { isMenu: true, isPublic: true, label: 'Carte', exact: true, path: '/', component: Home },
-      { isMenu: true, isPublic: true, label: 'Comment ça fonctionne ?', exact: true, path: '/howitworks', component: HowItWorks },
-      { isMenu: true, isPublic: true, label: 'Ajouter une photo ou une vidéo', exact: true, path: '/upload', component: Upload },
+      { isMenu: true, isPublic: true, label: "Qu'est ce que c'est ?", exact: true, path: '/howitworks', component: HowItWorks },
+      { isMenu: true, isPublic: true, label: 'Participer à la photothèque', exact: true, path: '/upload', component: Upload },
+      { isMenu: true, isPublic: true, label: 'Contact', exact: true, path: '/contact', component: Contact },
+      { isMenu: true, isPublic: true, label: 'Mentions légales', exact: true, path: '/legal-notices', component: LegalNotices },
+      { isMenu: true, isPublic: true, label: 'Crédits', exact: true, path: '/credits', component: Credits },
       { isMenu: false, isPublic: true, label: 'Connection', path: '/login', component: Login }
     ]
 
