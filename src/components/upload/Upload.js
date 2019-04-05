@@ -59,16 +59,6 @@ function getStepContent(step, classes, handleChange, resourceDate) {
             variant="outlined"
             onChange={(e) => handleChange('label', e.target.value)}
           />
-          <TextField
-            id="description"
-            label="Description"
-            multiline
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            helperText="N'hésitez pas à renseigner la description. S'il manque des informations dans les autre champs, nous allons peut-être pouvoir les ajouter de notre côté."
-            onChange={(e) => handleChange('description', e.target.value)}
-          />
           <Grid container justify="flex-start">
             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
               <DatePicker
@@ -101,6 +91,16 @@ function getStepContent(step, classes, handleChange, resourceDate) {
               onChange={(e) => handleChange('longitude', parseFloat(e.target.value))}
             />
           </Grid>
+          <TextField
+            id="description"
+            label="Description"
+            multiline
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            helperText="N'hésitez pas à renseigner une description. S'il manque des informations dans les autre champs, nous allons peut-être pouvoir les ajouter de notre côté."
+            onChange={(e) => handleChange('description', e.target.value)}
+          />
           <Grid container justify="flex-start">
             <TextField
               required
