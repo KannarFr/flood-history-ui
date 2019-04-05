@@ -158,7 +158,9 @@ class Upload extends Component {
       'date': this.state.date,
       'lat': this.state.latitude,
       'lng': this.state.longitude,
-      'providerContact': this.state.providerContact
+      'providerContact': this.state.providerContact,
+      'providerFirstName': this.state.providerFirstName,
+      'providerLastName': this.state.providerLastName
     }
 
     fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources', {
