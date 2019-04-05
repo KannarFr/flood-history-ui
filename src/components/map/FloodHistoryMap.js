@@ -1,10 +1,15 @@
-import React, { Component } from 'react'
-import { Map, TileLayer, Marker, VideoOverlay } from 'react-leaflet'
-import Viewer from './Viewer'
+import React, { Component } from 'react';
 
-import 'leaflet/dist/leaflet.css'
+import { Map, TileLayer, Marker, VideoOverlay, withLeaflet } from 'react-leaflet';
+import { ReactLeafletSearch, ReactLeafletZoomIndicator } from 'react-leaflet-search';
+
+import Viewer from './Viewer';
+
+import 'leaflet/dist/leaflet.css';
 
 import L from 'leaflet';
+
+const wrappedZoomIndicator = withLeaflet(ReactLeafletZoomIndicator)
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -61,6 +66,32 @@ class FloodHistoryMap extends Component {
             bounds={[[32, -130], [13, -100]]}
             play={this.state.play}
             url="https://www.mapbox.com/bites/00188/patricia_nasa.webm"
+          />
+          <ReactLeafletSearch
+            provider="OpenStreetMap"
+            position="topleft"
+            inputPlaceholder="Custom placeholder"
+            search = {
+              [33.100745405144245, 46.48315429687501]
+            }
+            showMarker={true}
+            zoom={5}
+            showPopup={true}
+            popUp={this.customPopup}
+            closeResultsOnClick={true}
+            openSearchOnLoad={true}
+            // // these searchbounds would limit results to only Turkey.
+            searchBounds = {
+              [
+                [33.100745405144245, 46.48315429687501],
+                [44.55916341529184, 24.510498046875]
+              ]
+            }
+            // providerOptions={{region: 'tr'}}
+
+            // default provider OpenStreetMap
+            // provider="BingMap"
+            // providerKey="AhkdlcKxeOnNCJ1wRIPmrOXLxtEHDvuWUZhiT4GYfWgfxLthOYXs5lUMqWjQmc27"
           />
         </Map>
 
