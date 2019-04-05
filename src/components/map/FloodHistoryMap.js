@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import { Map, TileLayer, Marker, VideoOverlay, withLeaflet } from 'react-leaflet';
-import { ReactLeafletSearch, ReactLeafletZoomIndicator } from 'react-leaflet-search';
+import { ReactLeafletSearch } from 'react-leaflet-search';
+import { ReactLeafletZoomIndicator } from 'react-leaflet-zoom-indicator'
 
 import Viewer from './Viewer';
 
@@ -9,7 +10,8 @@ import 'leaflet/dist/leaflet.css';
 
 import L from 'leaflet';
 
-const wrappedZoomIndicator = withLeaflet(ReactLeafletZoomIndicator)
+const WrappedLeafletZoomIndicator = withLeaflet(ReactLeafletZoomIndicator);
+const WrappedLeafletSearchIndicator = withLeaflet(ReactLeafletSearch);
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -67,7 +69,8 @@ class FloodHistoryMap extends Component {
             play={this.state.play}
             url="https://www.mapbox.com/bites/00188/patricia_nasa.webm"
           />
-          <ReactLeafletSearch
+          <WrappedLeafletZoomIndicator head='zoom:' position='topleft' />
+          <WrappedLeafletSearchIndicator
             provider="OpenStreetMap"
             position="topleft"
             inputPlaceholder="Custom placeholder"
