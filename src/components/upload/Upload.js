@@ -227,7 +227,7 @@ class Upload extends Component {
   render = () => {
     const { classes } = this.props
     const steps = getSteps()
-    const { activeStep, resourceDate, currentResource, status } = this.state
+    const { activeStep, date, currentResource, status } = this.state
 
     return (
       <div className={classes.root}>
@@ -252,7 +252,7 @@ class Upload extends Component {
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
                 <StepContent>
-                  {getStepContent(index, classes, this.handleChange, resourceDate)}
+                  {getStepContent(index, classes, this.handleChange, date)}
                   <div className={classes.actionsContainer}>
                     <div>
                     {activeStep === steps.length - 1 ?
