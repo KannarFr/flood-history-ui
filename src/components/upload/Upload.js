@@ -16,8 +16,9 @@ import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers'
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { css } from '@emotion/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import frLocale from 'date-fns/locale/fr';
 
@@ -163,6 +164,8 @@ class Upload extends Component {
       'providerLastName': this.state.providerLastName
     }
 
+    this.setState({ loading: true, loadingTitle: "Envoi des informations..." })
+
     fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources', {
       method: "POST",
       mode: "cors",
@@ -174,6 +177,7 @@ class Upload extends Component {
       body: JSON.stringify(resourceToCreate)
     })
     .then((response) => {
+      this.setState({ statusInformations: response.status, loading: false })
       return response.json()
     }).then((resource) => {
       this.setState(
@@ -186,6 +190,7 @@ class Upload extends Component {
   uploadFileForResource = (resource) => () => {
     const data = new FormData()
     data.append('resource', document.getElementById("fileToUpload").files[0])
+    this.setState({ loading: true, loadingTitle: "Envoi du fichier..." })
 
     fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources/' + resource.id + '/upload', {
       method: "POST",
@@ -198,7 +203,7 @@ class Upload extends Component {
     })
     .then((response) => {
       this.setState(
-        { currentResource: null, status: response.status },
+        { currentResource: null, statusFile: response.status, loading: false },
         this.handleReset
       )
     })
@@ -229,22 +234,45 @@ class Upload extends Component {
   render = () => {
     const { classes } = this.props
     const steps = getSteps()
-    const { activeStep, date, currentResource, status } = this.state
+    const { activeStep, date, currentResource, statusFile, statusInformations, loading, loadingTitle } = this.state
 
     return (
       <div className={classes.root}>
-        { status ?
+        { loading ?
           <Dialog
             open={true}
             fullScreen={false}
             onClose={() => this.setState({ status: undefined })}
             aria-labelledby="responsive-dialog-title">
-
-            <DialogTitle id="responsive-dialog-title">Statut de l'ajout de votre ressource</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                { status >= 200 && status <= 299 ? "Ok" : "Erreur {status}" }
-              </DialogContentText>
+            <DialogTitle id="responsive-dialog-title">{loadingTitle}</DialogTitle>
+            <DialogContent style={{margin: "20px auto"}}>
+              <MoonLoader
+                css={css}
+                sizeUnit={"px"}
+                size={50}
+                color={'#123abc'}
+                loading={true}
+              />
+            </DialogContent>
+          </Dialog> : <></>
+        }
+        { statusInformations < 200 || statusInformations > 299 ?
+          <Dialog
+            open={true}
+            fullScreen={false}
+            onClose={() => this.setState({ statusInformations: undefined })}>
+            <DialogContent style={{margin: "20px auto"}}>
+              { statusInformations === 400 ? "Il manque des informations obligatoires (les champs suffixés d'un astérisque)." : "Erreur anormale, nous vous invitons à contacter le CERT." }
+            </DialogContent>
+          </Dialog> : <></>
+        }
+        { statusFile ?
+          <Dialog
+            open={true}
+            fullScreen={false}
+            onClose={() => this.setState({ statusFile: undefined })}>
+            <DialogContent style={{margin: "20px auto"}}>
+              { statusFile >= 200 && statusFile <= 299 ? "Participation envoyée." : "Erreur anormale, nous vous invitons à contacter le CERT." }
             </DialogContent>
           </Dialog> : <></>
         }
