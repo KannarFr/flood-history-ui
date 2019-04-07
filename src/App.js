@@ -25,8 +25,8 @@ import Contact from './components/contact/Contact'
 const navItemStyle = {
   color: 'inherit',
   textDecoration: 'none',
-  display: 'block',
-  padding: '0',
+  display: 'inline-block',
+  padding: '16px',
   margin: '0',
   width: '100%',
   height: '100%'
@@ -61,7 +61,7 @@ const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
       {routes ?
         routes.map((route, index) =>
           route.isMenu ?
-          <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ display: "block" }}>
+          <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ display: "inline-block", padding: 0, height: "auto" }}>
             <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
           </MenuItem> : null
         )
