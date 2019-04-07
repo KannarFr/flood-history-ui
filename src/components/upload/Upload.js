@@ -40,8 +40,8 @@ const styles = theme => ({
 
 function getSteps() {
   return [
-    'Informations sur la resource à envoyer (* : champ obligatoire)',
-    'Fichier'
+    'Informations sur la ressource à envoyer (* : champ obligatoire)',
+    'Fichier à envoyer'
   ]
 }
 
