@@ -272,7 +272,7 @@ class Upload extends Component {
             fullScreen={false}
             onClose={() => this.setState({ statusFile: undefined })}>
             <DialogContent style={{margin: "20px auto"}}>
-              { statusFile >= 200 && statusFile <= 299 ? "Participation envoyée." : "Erreur anormale, nous vous invitons à contacter le CERT." }
+              { statusFile >= 200 && statusFile <= 299 ? "Participation envoyée. Elle sera visible sur la carte après validation de l'équipe du SMBVAS." : "Erreur anormale, nous vous invitons à contacter le CERT." }
             </DialogContent>
           </Dialog> : <></>
         }
