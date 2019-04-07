@@ -42,11 +42,11 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
         { title }
       </Typography>
       {token ?
-        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
+        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
           <CloseIcon />
         </IconButton>
         :
-        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
+        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
           <SettingsIcon />
         </IconButton>
       }
