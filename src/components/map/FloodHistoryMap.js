@@ -10,6 +10,11 @@ import 'leaflet/dist/leaflet.css';
 
 import L from 'leaflet';
 
+/*          <VideoOverlay
+            bounds={[[32, -130], [13, -100]]}
+            play={this.state.play}
+            url="https://www.mapbox.com/bites/00188/patricia_nasa.webm"
+          />*/
 const WrappedLeafletZoomIndicator = withLeaflet(ReactLeafletZoomIndicator);
 const WrappedLeafletSearchIndicator = withLeaflet(ReactLeafletSearch);
 
@@ -64,11 +69,6 @@ class FloodHistoryMap extends Component {
           {resources.map(resource =>
             <Marker key={resource.id} position={[resource.lat, resource.lng]} onClick={() => this.handleMarkerClick(resource)} />
           )}
-          <VideoOverlay
-            bounds={[[32, -130], [13, -100]]}
-            play={this.state.play}
-            url="https://www.mapbox.com/bites/00188/patricia_nasa.webm"
-          />
           <WrappedLeafletZoomIndicator head='zoom:' position='topright' />
           <WrappedLeafletSearchIndicator
             provider="OpenStreetMap"
