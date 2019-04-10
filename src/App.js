@@ -38,9 +38,11 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
       <IconButton style={{ marginLeft: -12, marginRight: 20 }} color="inherit" aria-label="Menu" onClick={() => handleToggleMenu()}>
         <MenuIcon />
       </IconButton>
-      <Typography variant="title" color="inherit">
-        { title }
-      </Typography>
+      <Link style={{ color: "white", textDecoration: "none"}} to={"/"}>
+        <Typography variant="title" color="inherit">
+          { title }
+        </Typography>
+      </Link>
       {token ?
         <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
           <CloseIcon />
