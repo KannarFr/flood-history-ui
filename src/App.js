@@ -56,17 +56,19 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
 
 const Sidebar = ({ routes, open, handleToggleMenu }, props) => (
   <>
-    <Drawer open={open} docked={false} onClick={() => handleToggleMenu()}>
+    <Drawer achor={"top"} open={open} docked={"false"} onClick={() => handleToggleMenu()}>
       <img src={'/img/logo.webp'} width="270px" className="logo" alt="logo" style={{marginBottom: "50px", marginTop: "10px" }} />
-      {routes ?
-        routes.map((route, index) =>
-          route.isMenu ?
-          <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ display: "inline-block", padding: 0, height: "auto" }}>
-            <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
-          </MenuItem> : null
-        )
-        : <div>Chargement...</div>
-      }
+      <div>
+        {routes ?
+          routes.map((route, index) =>
+            route.isMenu ?
+            <MenuItem key={index} onClick={() => handleToggleMenu()} style={{ display: "block", padding: 0, height: "auto" }}>
+              <Link style={navItemStyle} to={`${route.path}`}>{route.label || '[no label]'}</Link>
+            </MenuItem> : null
+          )
+          : <div>Chargement...</div>
+        }
+      </div>
     </Drawer>
   </>
 )
