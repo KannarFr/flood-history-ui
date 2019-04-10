@@ -20,6 +20,7 @@ import Upload from './components/upload/Upload'
 import LegalNotices from './components/legalnotices/LegalNotices'
 import Credits from './components/credits/Credits'
 import Contact from './components/contact/Contact'
+import Manager from './components/manager/Manager'
 
 // styles
 const navItemStyle = {
@@ -43,14 +44,17 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
           { title }
         </Typography>
       </Link>
+      <Link style={{ marginLeft: "auto", color: "white"}} to={"/manage"}></Link>
       {token ?
         <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
           <CloseIcon />
         </IconButton>
         :
-        <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
-          <SettingsIcon />
-        </IconButton>
+        <Link style={{ marginLeft: "auto", color: "white"}} to={"/manage"}>
+          <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
+            <SettingsIcon />
+          </IconButton>
+        </Link>
       }
     </Toolbar>
   </AppBar>
@@ -111,7 +115,8 @@ export default class App extends Component {
       { isMenu: true, isPublic: true, label: 'Contact', exact: true, path: '/contact', component: Contact },
       { isMenu: true, isPublic: true, label: 'Mentions légales', exact: true, path: '/legal-notices', component: LegalNotices },
       { isMenu: true, isPublic: true, label: 'Crédits', exact: true, path: '/credits', component: Credits },
-      { isMenu: false, isPublic: true, label: 'Connection', path: '/login', component: Login }
+      { isMenu: false, isPublic: true, label: 'Connexion', path: '/login', component: Login },
+      { isMenu: false, isPublic: true, label: 'Manager', path: '/manage', component: Manager }
     ]
 
     const token = sessionStorage.getItem('token')

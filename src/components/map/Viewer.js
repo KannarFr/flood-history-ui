@@ -4,9 +4,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
-import Fab from '@material-ui/core/Fab';
-import ClearIcon from '@material-ui/icons/Clear';
+//import DialogActions from '@material-ui/core/DialogActions';
+//import ClearIcon from '@material-ui/icons/Clear';
 
 class Viewer extends Component {
   constructor(props) {
@@ -21,19 +20,25 @@ class Viewer extends Component {
     const { open } = this.state
     const { url, date, label, description, hideViewer } = this.props
 
+    /*
+      <DialogActions style={{ float: "right" }}>
+        <ClearIcon onClick={() => hideViewer()}/>
+      </DialogActions>
+    */
+
+    console.log(date)
+
     return (
       <Dialog
         open={open}
         onClose={() => hideViewer()}
-        fullScreen={true}
+        fullScreen={false}
         aria-labelledby="responsive-dialog-title">
-
-        <DialogActions>
-          <Fab aria-label="Clear" onClick={() => hideViewer()}>
-            <ClearIcon />
-          </Fab>
-        </DialogActions>
-        <DialogTitle id="responsive-dialog-title">{date} - {label}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">
+          { date !== undefined ?
+            date.substring(0, 10) + " - " + label :
+            <span><span style={{color: "red"}}>DATE MANQUANTE</span> - {label}</span> }
+        </DialogTitle>
         <DialogContent>
           <img src={url} alt={label} />
           <DialogContentText>
