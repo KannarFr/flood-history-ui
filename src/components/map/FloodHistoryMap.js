@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Map, TileLayer, Marker, VideoOverlay, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, Marker/*, VideoOverlay*/, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { ReactLeafletZoomIndicator } from 'react-leaflet-zoom-indicator'
 

@@ -44,18 +44,18 @@ const Header = ({ title, handleToggleMenu, logout, token }, props) => (
           { title }
         </Typography>
       </Link>
-      <Link style={{ marginLeft: "auto", color: "white"}} to={"/manage"}></Link>
-      {token ?
+      <div style={{ marginLeft: "auto" }}>
+      <Link style={{ color: "white"}} to={"/manage"}>
         <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
-          <CloseIcon />
+          <SettingsIcon />
         </IconButton>
-        :
-        <Link style={{ marginLeft: "auto", color: "white"}} to={"/manage"}>
-          <IconButton style={{ marginLeft: "auto" }} color="inherit" aria-label="Menu">
-            <SettingsIcon />
-          </IconButton>
-        </Link>
+      </Link>
+      {token ?
+        <IconButton style={{ marginLeft: "auto" }} onClick={() => logout()} color="inherit" aria-label="Menu">
+          <CloseIcon />
+        </IconButton> : ""
       }
+      </div>
     </Toolbar>
   </AppBar>
 )
@@ -88,11 +88,11 @@ const PrivateRoute = ({ component: Component, token, ...rest }) =>
 const PublicRoute = ({ component: Component, login, ...rest }) =>
   <Route {...rest} render={props => (<Component login={login} {...props} />)} />
 
-const Main = ({ routes, token }, props) =>
+const Main = ({ routes, token, login }, props) =>
   <Switch>
     {routes.map((route, index) =>
       route.isPublic ?
-        <PublicRoute key={index} path={route.path} exact={route.exact} component={route.component} />
+        <PublicRoute key={index} path={route.path} exact={route.exact} component={route.component} login={login} />
         : <PrivateRoute key={index} path={route.path} exact={route.exact} component={route.component} token={token} />
     )}
   </Switch>
@@ -103,7 +103,7 @@ export default class App extends Component {
     this.state = {
       routes: null,
       open: false,
-      token: null
+      token: sessionStorage.getItem("token")
     }
   }
 
@@ -115,16 +115,17 @@ export default class App extends Component {
       { isMenu: true, isPublic: true, label: 'Contact', exact: true, path: '/contact', component: Contact },
       { isMenu: true, isPublic: true, label: 'Mentions légales', exact: true, path: '/legal-notices', component: LegalNotices },
       { isMenu: true, isPublic: true, label: 'Crédits', exact: true, path: '/credits', component: Credits },
-      { isMenu: false, isPublic: true, label: 'Connexion', path: '/login', component: Login },
-      { isMenu: false, isPublic: true, label: 'Manager', path: '/manage', component: Manager }
+      { isMenu: false, isPublic: false, label: 'Manager', exact: true, path: '/manage', component: Manager },
+      { isMenu: false, isPublic: true, label: 'Connexion', path: '/login', component: Login }
     ]
 
-    const token = sessionStorage.getItem('token')
-    this.setState({ routes, token })
+    this.setState({ routes })
   }
 
   login = (token) => {
-    this.setState({ token })
+    this.setState({ token },
+      sessionStorage.setItem("token", token)
+    )
   }
 
   logout = () => {
@@ -144,7 +145,7 @@ export default class App extends Component {
           <>
             <Header title="Les inondations de l'Austreberthe" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
             <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
-            <Main routes={routes} token={token} />
+            <Main routes={routes} token={token} login={this.login} />
           </>
         </Router>
     )

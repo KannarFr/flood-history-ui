@@ -208,8 +208,12 @@ class Manager extends React.Component {
   };
 
   componentWillMount = () => {
+    var authHeader = new Headers();
+    authHeader.append("X-Token", sessionStorage.getItem("token"));
+
     fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources', {
-      method: 'GET'
+      method: 'GET',
+      headers: authHeader
     }).then(res => {
       return res.json()
     }).then(resources => {
@@ -278,7 +282,6 @@ class Manager extends React.Component {
     const { resources, order, orderBy, selected, rowsPerPage, page, resourceToShow } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, resources.length - page * rowsPerPage);
 
-    console.log(resourceToShow)
     return (
       <>
         {resourceToShow ? <Viewer hideViewer={this.hideViewer} {...resourceToShow} /> : null}
@@ -317,8 +320,8 @@ class Manager extends React.Component {
                         </TableCell>
                         <TableCell>{n.type}</TableCell>
                         <TableCell>{n.status}</TableCell>
-                        <TableCell>{n.creation_date}</TableCell>
-                        <TableCell>{n.edition_date}</TableCell>
+                        <TableCell>{n.creationDate}</TableCell>
+                        <TableCell>{n.editionDate}</TableCell>
                       </TableRow>
                     );
                   })}
