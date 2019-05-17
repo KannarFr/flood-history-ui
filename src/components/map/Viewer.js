@@ -7,6 +7,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 //import DialogActions from '@material-ui/core/DialogActions';
 //import ClearIcon from '@material-ui/icons/Clear';
 
+import Viewer2 from './Viewer2';
+
 class Viewer extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +20,8 @@ class Viewer extends Component {
 
   render = () => {
     const { open } = this.state
-    const { url, date, label, description, hideViewer } = this.props
+    const { resources, hideViewer } = this.props
+    
 
     /*
       <DialogActions style={{ float: "right" }}>
@@ -26,10 +29,10 @@ class Viewer extends Component {
       </DialogActions>
     */
 
-    console.log(date)
+    //console.log(date)
 
     return (
-      <Dialog
+      /*<Dialog
         open={open}
         onClose={() => hideViewer()}
         fullScreen={false}
@@ -45,7 +48,8 @@ class Viewer extends Component {
             {description}
           </DialogContentText>
         </DialogContent>
-      </Dialog>
+      </Dialog>*/
+      <Viewer2 resources={resources}></Viewer2>
     )
   }
 }

@@ -30,8 +30,8 @@ class FloodHistoryMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      resourceToShow: null,
-      resources: [],
+      resourcesToShow: null,
+      resourcesGroupedByCoordinates: null,
       lat: 49.606059,
       lng: 0.901217,
       zoom: 11,
@@ -43,21 +43,21 @@ class FloodHistoryMap extends Component {
       method: 'GET'
     }).then(res => {
       return res.json()
-    }).then(resources => {
+    }).then(resourcesGroupedByCoordinates => {
       this.setState({
-        resources: resources,
+        resourcesGroupedByCoordinates: resourcesGroupedByCoordinates,
       })
     })
   }
 
-  handleMarkerClick = (resource) => this.setState({ resourceToShow: resource })
+  handleMarkerClick = (resources) => this.setState({ resourcesToShow: resources })
 
-  hideViewer = () => this.setState({ resourceToShow: null })
+  hideViewer = () => this.setState({ resourcesToShow: null })
 
   render = () => {
     const position = [this.state.lat, this.state.lng]
-    const resources = this.state.resources
-    const resourceToShow = this.state.resourceToShow
+    const resourcesGroupedByCoordinates = this.state.resourcesGroupedByCoordinates
+    const resourcesToShow = this.state.resourcesToShow
 
     return (
       <>
@@ -66,9 +66,9 @@ class FloodHistoryMap extends Component {
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {resources.map(resource =>
-            <Marker key={resource.id} position={[resource.lat, resource.lng]} onClick={() => this.handleMarkerClick(resource)} />
-          )}
+          {resourcesGroupedByCoordinates ? resourcesGroupedByCoordinates.map((resources, index) =>
+            <Marker key={index} position={[resources[0].lat, resources[0].lng]} onClick={() => this.handleMarkerClick(resources)} />
+          ) : null}
           <WrappedLeafletZoomIndicator head='zoom:' position='topright' />
           <WrappedLeafletSearchIndicator
             provider="OpenStreetMap"
@@ -83,7 +83,7 @@ class FloodHistoryMap extends Component {
           />
         </Map>
 
-        {resourceToShow ? <Viewer hideViewer={this.hideViewer} {...resourceToShow} /> : null}
+        {resourcesToShow ? <Viewer hideViewer={this.hideViewer} resources={resourcesToShow} /> : null}
       </>
     )
   }
