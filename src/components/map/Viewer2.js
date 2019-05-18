@@ -6,7 +6,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import { DialogTitle } from '@material-ui/core';
+import { DialogTitle, DialogActions } from '@material-ui/core';
+import Button from '@material-ui/core/Button'
 
 function TabContainer(props) {
   return (
@@ -63,6 +64,7 @@ class Viewer2 extends Component {
         {value >= 0 ?
           <TabContainer>
             <h1 style={{textAlign: "center"}}>{resources[value].label}</h1>
+            <h6 style={{textAlign: "center"}}>{"le " + resources[value].date.substring(0, 10) + ", coordonnées : " + resources[value].lat + " - " + resources[value].lng}</h6>
             <img class={"zoom"} src={resources[value].url} alt={resources[value].label} onClick={() => this.showZoom()} />
             {resources[value].description}
           </TabContainer>
@@ -72,7 +74,17 @@ class Viewer2 extends Component {
           onClose={() => this.hideZoom()}
           fullScreen={true}
           aria-labelledby="responsive-dialog-title">
-          <DialogTitle><h3 style={{textAlign: "center"}}>Échap pour fermer</h3></DialogTitle>
+          <DialogActions style={{justifyContent: "center"}}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => this.hideZoom()}
+            >Fermer</Button>
+          </DialogActions>
+          <DialogTitle>
+            <h3 style={{textAlign: "center", margin: 0}}>{resources[value].label}</h3>
+            <h6 style={{textAlign: "center"}}>{"le " + resources[value].date.substring(0, 10) + ", coordonnées : " + resources[value].lat + " - " + resources[value].lng}</h6>
+          </DialogTitle>
           <DialogContent style={{textAlign: "center"}}>
             <img height="100%" src={resources[value].url} alt={resources[value].label} />
           </DialogContent>
