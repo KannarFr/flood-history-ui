@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-//import DialogActions from '@material-ui/core/DialogActions';
-//import ClearIcon from '@material-ui/icons/Clear';
 
 import Viewer2 from './Viewer2';
 
@@ -21,35 +17,17 @@ class Viewer extends Component {
   render = () => {
     const { open } = this.state
     const { resources, hideViewer } = this.props
-    
-
-    /*
-      <DialogActions style={{ float: "right" }}>
-        <ClearIcon onClick={() => hideViewer()}/>
-      </DialogActions>
-    */
-
-    //console.log(date)
 
     return (
-      /*<Dialog
+      <Dialog
         open={open}
         onClose={() => hideViewer()}
         fullScreen={false}
         aria-labelledby="responsive-dialog-title">
-        <DialogTitle id="responsive-dialog-title">
-          { date !== undefined ?
-            date.substring(0, 10) + " - " + label :
-            <span><span style={{color: "red"}}>DATE MANQUANTE</span> - {label}</span> }
-        </DialogTitle>
         <DialogContent>
-          <img src={url} alt={label} />
-          <DialogContentText>
-            {description}
-          </DialogContentText>
+          <Viewer2 resources={resources}></Viewer2>
         </DialogContent>
-      </Dialog>*/
-      <Viewer2 resources={resources}></Viewer2>
+      </Dialog>
     )
   }
 }

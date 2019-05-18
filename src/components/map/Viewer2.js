@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -31,25 +30,22 @@ class Viewer2 extends Component {
       open: true,
       value: 0
     }
-    console.log(props)
   }
 
   handleChange = (event, value) => {
-    console.log(value)
     this.setState({ value });
   };
 
   render() {
-    const { classes, resources } = this.props;
+    const { resources } = this.props;
     const { value } = this.state;
-    console.log(resources[value])
 
     return (
-      <Paper square className={classes.root}>
+      <>
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          variant="fullWidth"
+          variant=""
           indicatorColor="secondary"
           textColor="secondary"
         >
@@ -59,15 +55,12 @@ class Viewer2 extends Component {
         </Tabs>
         {value >= 0 ?
           <TabContainer>
-            <h1>{ resources[value].date !== undefined ?
-            resources[value].date.substring(0, 10) + " - " + resources[value].label :
-            <span><span style={{color: "red"}}>DATE MANQUANTE</span> - {resources[value].label}</span>}</h1>
+            <h1 style={{textAlign: "center"}}>{resources[value].label}</h1>
             <img src={resources[value].url} alt={resources[value].label} />
             {resources[value].description}
           </TabContainer>
         : null}
-      </Paper>
-
+      </>
     );
   }
 }
