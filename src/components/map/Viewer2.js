@@ -72,9 +72,9 @@ class Viewer2 extends Component {
           onClose={() => this.hideZoom()}
           fullScreen={true}
           aria-labelledby="responsive-dialog-title">
-          <DialogTitle><h2 style={{textAlign: "center"}}>Echap pour quitter</h2></DialogTitle>
-          <DialogContent>
-            <img width="80%" src={resources[value].url} alt={resources[value].label} />
+          <DialogTitle><h3 style={{textAlign: "center"}}>Échap pour fermer</h3></DialogTitle>
+          <DialogContent style={{textAlign: "center"}}>
+            <img height="100%" src={resources[value].url} alt={resources[value].label} />
           </DialogContent>
         </Dialog>
       </>
