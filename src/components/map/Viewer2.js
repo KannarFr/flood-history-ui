@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import { DialogTitle } from '@material-ui/core';
 
 function TabContainer(props) {
   return (
@@ -27,7 +30,7 @@ class Viewer2 extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: true,
+      open: false,
       value: 0
     }
   }
@@ -36,9 +39,13 @@ class Viewer2 extends Component {
     this.setState({ value });
   };
 
+  hideZoom = () => this.setState({ open: false })
+
+  showZoom = () => this.setState({ open: true })
+
   render() {
     const { resources } = this.props;
-    const { value } = this.state;
+    const { value, open } = this.state;
 
     return (
       <>
@@ -56,10 +63,20 @@ class Viewer2 extends Component {
         {value >= 0 ?
           <TabContainer>
             <h1 style={{textAlign: "center"}}>{resources[value].label}</h1>
-            <img src={resources[value].url} alt={resources[value].label} />
+            <img class={"zoom"} src={resources[value].url} alt={resources[value].label} onClick={() => this.showZoom()} />
             {resources[value].description}
           </TabContainer>
         : null}
+        <Dialog
+          open={open}
+          onClose={() => this.hideZoom()}
+          fullScreen={true}
+          aria-labelledby="responsive-dialog-title">
+          <DialogTitle><h2 style={{textAlign: "center"}}>Echap pour quitter</h2></DialogTitle>
+          <DialogContent>
+            <img width="80%" src={resources[value].url} alt={resources[value].label} />
+          </DialogContent>
+        </Dialog>
       </>
     );
   }

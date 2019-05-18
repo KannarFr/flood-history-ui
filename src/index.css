@@ -25,3 +25,7 @@ img {
   max-height: 100%;
   image-orientation: from-image;
 }
+
+img:hover {
+  cursor: pointer;
+}

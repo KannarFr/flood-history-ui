@@ -11,7 +11,6 @@ class Viewer extends Component {
     this.state = {
       open: true
     }
-    console.log(props)
   }
 
   render = () => {
