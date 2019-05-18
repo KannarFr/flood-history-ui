@@ -99,7 +99,7 @@ function getStepContent(step, classes, handleChange, resourceDate) {
             fullWidth
             margin="normal"
             variant="outlined"
-            helperText="N'hésitez pas à renseigner une description. S'il manque des informations dans les autre champs, nous allons peut-être pouvoir les ajouter de notre côté."
+            helperText="N'hésitez pas à renseigner une description. S'il manque des informations dans les autres champs, nous allons peut-être pouvoir les ajouter de notre côté."
             onChange={(e) => handleChange('description', e.target.value)}
           />
           <Grid container justify="flex-start">
