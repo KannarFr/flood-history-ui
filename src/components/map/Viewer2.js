@@ -53,9 +53,10 @@ class Viewer2 extends Component {
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          variant=""
           indicatorColor="secondary"
           textColor="secondary"
+          variant="scrollable"
+          scrollButtons="auto"
         >
           {resources ? resources.map(resource =>
             <Tab key={resource.id} label={resource.date.substring(0, 10)} />
