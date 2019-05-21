@@ -65,7 +65,6 @@ class Viewer2 extends Component {
         {value >= 0 ?
           <TabContainer>
             <h1 style={{textAlign: "center"}}>{resources[value].label}</h1>
-            <h6 style={{textAlign: "center"}}>{"le " + resources[value].date.substring(0, 10) + ", coordonnées : " + resources[value].lat + " - " + resources[value].lng}</h6>
             <img class={"zoom"} src={resources[value].url} alt={resources[value].label} onClick={() => this.showZoom()} />
             {resources[value].description}
           </TabContainer>
@@ -84,7 +83,6 @@ class Viewer2 extends Component {
           </DialogActions>
           <DialogTitle>
             <h3 style={{textAlign: "center", margin: 0}}>{resources[value].label}</h3>
-            <h6 style={{textAlign: "center"}}>{"le " + resources[value].date.substring(0, 10) + ", coordonnées : " + resources[value].lat + " - " + resources[value].lng}</h6>
           </DialogTitle>
           <DialogContent style={{textAlign: "center"}}>
             <img height="100%" src={resources[value].url} alt={resources[value].label} />
