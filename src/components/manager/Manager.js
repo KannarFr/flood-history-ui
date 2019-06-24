@@ -1,25 +1,16 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-import Viewer from '../map/Viewer';
+import EditableViewer from './EditableViewer';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -46,11 +37,12 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'title', numeric: false, disablePadding: true, label: 'Titre' },
+  { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
+  { id: 'title', numeric: false, disablePadding: false, label: 'Titre' },
   { id: 'type', numeric: false, disablePadding: false, label: 'Type' },
   { id: 'status', numeric: false, disablePadding: false, label: 'Statut' },
-  { id: 'creation_date', numeric: false, disablePadding: false, label: 'Crée le' },
-  { id: 'edition_date', numeric: false, disablePadding: false, label: 'Edité le' },
+  { id: 'creation_date', numeric: false, disablePadding: false, label: 'Créée le' },
+  { id: 'edition_date', numeric: false, disablePadding: false, label: 'Editée le' },
 ];
 
 class ManagerHead extends React.Component {
@@ -59,18 +51,11 @@ class ManagerHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    const { order, orderBy } = this.props;
 
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
-          </TableCell>
           {rows.map(
             row => (
               <TableCell
@@ -103,90 +88,16 @@ class ManagerHead extends React.Component {
 }
 
 ManagerHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  orderBy: PropTypes.string.isRequired
 };
-
-const toolbarStyles = theme => ({
-  root: {
-    paddingRight: theme.spacing.unit,
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  spacer: {
-    flex: '1 1 100%',
-  },
-  actions: {
-    color: theme.palette.text.secondary,
-  },
-  title: {
-    flex: '0 0 auto',
-  },
-});
-
-let ManagerToolbar = props => {
-  const { numSelected, classes } = props;
-
-  return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant="h6" id="tableTitle">
-            Interface de gestion des marqueurs
-          </Typography>
-        )}
-      </div>
-      <div className={classes.spacer} />
-      <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Supprimer">
-            <IconButton aria-label="Supprimer">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filtrer">
-            <IconButton aria-label="Filtrer">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-      </div>
-    </Toolbar>
-  );
-};
-
-ManagerToolbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-};
-
-ManagerToolbar = withStyles(toolbarStyles)(ManagerToolbar);
 
 const styles = theme => ({
   root: {
     width: 'auto',
-    margin: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 3,
+    boxShadow: 'none'
   },
   table: {
     minWidth: 1020,
@@ -200,11 +111,8 @@ class Manager extends React.Component {
   state = {
     order: 'desc',
     orderBy: 'creation_date',
-    selected: [],
     resources: [],
-    resourceToShow: null,
-    page: 0,
-    rowsPerPage: 50,
+    resourceToShow: null
   };
 
   componentWillMount = () => {
@@ -217,7 +125,6 @@ class Manager extends React.Component {
     }).then(res => {
       return res.json()
     }).then(resources => {
-      console.dir(resources)
       this.setState({
         resources: resources,
       })
@@ -235,89 +142,37 @@ class Manager extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = event => {
-    if (event.target.checked) {
-      this.setState(state => ({ selected: state.resources.map(n => n.id) }));
-      return;
-    }
-    this.setState({ selected: [] });
-  };
-
-  handleClick = (event, id) => {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    this.setState({ selected: newSelected });
-  };
-
-  handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
-
-  handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
-
   handleViewerClick = (resource) => this.setState({ resourceToShow: resource })
   hideViewer = () => this.setState({ resourceToShow: null })
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
-
   render() {
     const { classes } = this.props;
-    const { resources, order, orderBy, selected, rowsPerPage, page, resourceToShow } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, resources.length - page * rowsPerPage);
+    const { resources, order, orderBy, resourceToShow } = this.state;
 
     return (
       <>
-        {resourceToShow ? <Viewer hideViewer={this.hideViewer} {...resourceToShow} /> : null}
+        {resourceToShow ? <EditableViewer hideViewer={this.hideViewer} {...resourceToShow} /> : null}
         <Paper className={classes.root}>
-          <ManagerToolbar numSelected={selected.length} />
           <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby="tableTitle">
               <ManagerHead
-                numSelected={selected.length}
                 order={order}
                 orderBy={orderBy}
-                onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
                 rowCount={resources.length}
               />
               <TableBody>
                 {stableSort(resources, getSorting(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
-                    const isSelected = this.isSelected(n.id);
                     return (
                       <TableRow
                         hover
                         onClick={event => this.handleViewerClick(n)}
-                        role="checkbox"
-                        aria-checked={isSelected}
                         tabIndex={-1}
                         key={n.id}
-                        selected={isSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isSelected} onClick={event => this.handleClick(event, n.id)} />
-                        </TableCell>
-                        <TableCell component="th" scope="row" padding="none">
-                          {n.label}
-                        </TableCell>
+                        <TableCell style={{fontFamily: "Courier New", padding: 0}}>{n.id}</TableCell>
+                        <TableCell>{n.label}</TableCell>
                         <TableCell>{n.type}</TableCell>
                         <TableCell>{n.status}</TableCell>
                         <TableCell>{n.creationDate}</TableCell>
@@ -325,29 +180,9 @@ class Manager extends React.Component {
                       </TableRow>
                     );
                   })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 49 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
               </TableBody>
             </Table>
           </div>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={resources.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            backIconButtonProps={{
-              'aria-label': 'Previous Page',
-            }}
-            nextIconButtonProps={{
-              'aria-label': 'Next Page',
-            }}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
         </Paper>
       </>
     );
