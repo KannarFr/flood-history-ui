@@ -20,7 +20,7 @@ d'auteurs, la reproduction de tout ou partie de ce site est interdite sans accor
 SMBVAS.</p>
 
 <p><b>Directeur de publication :</b> Michel CORTINOVIS</p>
-<p><b>Création du site web :</b> Alexandre DUVAL</p>
+<p><b>Création du site web :</b> <a href="https://twitter.com/KannarFr">Alexandre DUVAL</a></p>
 <p><b>Hébergement :</b> Clever Cloud, 26 boulevard de Stalingrad. 44000 Nantes – France</p>
 <p><b>Crédits photographies et vidéos :</b> SMBVAS</p>
 <p><b>Pour tout renseignement <i>ou exercice des droits</i></b>, vous pouvez écrire à :</p>
