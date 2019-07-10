@@ -43,7 +43,7 @@ dispositions de la loi n° 78-17 du 6 janvier 1978 relative à l’informatique,
 libertés.</p><p>
 L’utilisateur dispose d’un droit d’accès, de modification, de rectification et de suppression des
 données qui le concernent (Articles 34, 35 et 36 de la loi du 6 janvier 1978)
-Les utilisateurs de www.inondations-austreberthe.fr s’interdisent de transmettre par courriel ou
+Les utilisateurs de <a href="inondations-austreberthe.fr">inondations-austreberthe.fr</a> s’interdisent de transmettre par courriel ou
 par formulaire, des contenus constituant ou comportant une infraction pénale, qui porteraient
 atteinte à l’ordre public ou aux bonnes mœurs, aux droits de la personnalité, etc. Les utilisateurs
 s’interdisent également de transmettre toute publicité ou matériel promotionnel non sollicités
