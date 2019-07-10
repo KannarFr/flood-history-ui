@@ -16,7 +16,7 @@ depuis 2001.
 Ces archives photo et vidéo ont été collectées par le SMBVAS et sont désormais géolocalisées.
 Vous pouvez participer en nous transmettant vos photos d’inondations anciennes ou récentes.
 Ces photos seront étudiées par nos agents et ajoutées à la photothèque en ligne. Pour cela,
-cliquez sur « Participer » dans le menu.
+cliquez <a href="https://inondations-austreberthe.fr/upload">ici</a>.
 Pour en savoir plus sur les inondations qui ont touché ce territoire, rendez-vous sur notre <a href="www.smbvas.fr">site
 internet</a>.
           </p>
