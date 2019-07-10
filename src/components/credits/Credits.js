@@ -7,7 +7,7 @@ export default class Credits extends Component {
       <div style={{padding: "20px"}}>
           <h1>Crédits & mentions légales :</h1>
           <p>
-Site édité par : Syndicat Mixte du Bassin Versant de l’Austreberthe et du Saffimbec
+<b>Site édité par :</b> Syndicat Mixte du Bassin Versant de l’Austreberthe et du Saffimbec
 </p>
 <p>
 Ce site Internet ne comporte que des informations d'ordre général, qui ne sont pas destinées
