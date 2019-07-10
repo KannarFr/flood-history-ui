@@ -31,7 +31,7 @@ SMBVAS.</p>
 <p><a href="mailto:secretariat@smbvas.fr">secretariat@smbvas.fr</a> - 02 32 94 00 74</p>
 <h1>Conditions d’utilisation :</h1>
 <p>
-Les contenus (texte, son, image, logiciel, logo, marque, etc.) publiés sur<a href="inondations-austreberthe.fr">inondations-austreberthe.fr</a> sont protégés conformément aux dispositions nationales et internationales sur
+Les contenus (texte, son, image, logiciel, logo, marque, etc.) publiés sur <a href="inondations-austreberthe.fr">inondations-austreberthe.fr</a> sont protégés conformément aux dispositions nationales et internationales sur
 la Propriété Intellectuelle.</p><p>
 Sous réserve des dispositions des articles L 122-5, L 211-3 et L 342-3 du Code de la Propriété
 Intellectuelle, toute reproduction et/ou communication au public de tout ou partie de ces
