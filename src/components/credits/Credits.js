@@ -27,7 +27,7 @@ SMBVAS.</p>
 <p>Monsieur le Président</p>
 <p>Syndicat Mixte du Bassin Versant de l'Austreberthe et du Saffimbec</p>
 <p>213 ancienne route de Villers</p>
-<p>76 360 VILLERS-ECALLES</p>
+<p>76360 VILLERS-ECALLES</p>
 <p><a href="mailto:secretariat@smbvas.fr">secretariat@smbvas.fr</a> - 02 32 94 00 74</p>
 <h1>Conditions d’utilisation :</h1>
 <p>
