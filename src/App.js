@@ -17,9 +17,9 @@ import Login from './components/login/Login'
 import FloodHistoryMap from './components/map/FloodHistoryMap'
 import HowItWorks from './components/howitworks/HowItWorks'
 import Upload from './components/upload/Upload'
-import LegalNotices from './components/legalnotices/LegalNotices'
+//import LegalNotices from './components/legalnotices/LegalNotices'
 import Credits from './components/credits/Credits'
-import Contact from './components/contact/Contact'
+//import Contact from './components/contact/Contact'
 import Manager from './components/manager/Manager'
 
 // styles
@@ -112,9 +112,9 @@ export default class App extends Component {
       { isMenu: true, isPublic: true, label: 'Carte', exact: true, path: '/', component: FloodHistoryMap },
       { isMenu: true, isPublic: true, label: "Qu'est ce que c'est ?", exact: true, path: '/howitworks', component: HowItWorks },
       { isMenu: true, isPublic: true, label: 'Participer à la photothèque', exact: true, path: '/upload', component: Upload },
-      { isMenu: true, isPublic: true, label: 'Contact', exact: true, path: '/contact', component: Contact },
-      { isMenu: true, isPublic: true, label: 'Mentions légales', exact: true, path: '/legal-notices', component: LegalNotices },
-      { isMenu: true, isPublic: true, label: 'Crédits', exact: true, path: '/credits', component: Credits },
+      //{ isMenu: true, isPublic: true, label: 'Contact', exact: true, path: '/contact', component: Contact },
+      //{ isMenu: true, isPublic: true, label: 'Mentions légales', exact: true, path: '/legal-notices', component: LegalNotices },
+      { isMenu: true, isPublic: true, label: 'Crédits & mentions légales', exact: true, path: '/credits', component: Credits },
       { isMenu: false, isPublic: false, label: 'Manager', exact: true, path: '/manage', component: Manager },
       { isMenu: false, isPublic: true, label: 'Connexion', path: '/login', component: Login }
     ]
