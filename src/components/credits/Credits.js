@@ -21,7 +21,7 @@ SMBVAS.</p>
 
 <p><b>Directeur de publication :</b> Michel CORTINOVIS</p>
 <p><b>Création du site web :</b> Alexandre DUVAL</p>
-<p><b>Hébergement :</b> OVH, 2 rue Kellermann. 59100 Roubaix – France</p>
+<p><b>Hébergement :</b> Clever Cloud, 26 boulevard de Stalingrad. 44000 Nantes – France</p>
 <p><b>Crédits photographies et vidéos :</b> SMBVAS</p>
 <p><b>Pour tout renseignement <i>ou exercice des droits</i></b>, vous pouvez écrire à :</p>
 <p>Monsieur le Président</p>
