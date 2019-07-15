@@ -286,12 +286,15 @@ class Upload extends Component {
                   <div className={classes.actionsContainer}>
                     <div>
                     {activeStep === steps.length - 1 ?
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.uploadFileForResource(currentResource)}
-                        className={classes.button}
-                      >Envoyer</Button>
+                      <>
+                        <p>En envoyant ces photos, j’autorise le SMBVAS à diffuser et reproduire, sans rétributions, la/les photos transmises, à des fins non commerciales, dans le cadre de ses actions.</p>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={this.uploadFileForResource(currentResource)}
+                          className={classes.button}
+                        >Envoyer</Button>
+                      </>
                       :
                       <Button
                         variant="contained"
