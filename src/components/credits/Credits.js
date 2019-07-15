@@ -23,7 +23,7 @@ SMBVAS.</p>
 <p><b>Création du site web :</b> <a href="https://twitter.com/KannarFr">Alexandre DUVAL</a></p>
 <p><b>Hébergement :</b> Clever Cloud, 26 boulevard de Stalingrad. 44000 Nantes – France</p>
 <p><b>Crédits photographies et vidéos :</b> SMBVAS</p>
-<p><b>Pour tout renseignement <i>ou exercice des droits</i></b>, vous pouvez écrire à :</p>
+<p><b>Pour tout renseignement ou exercice des droits</b>, vous pouvez écrire à :</p>
 <p>Monsieur le Président</p>
 <p>Syndicat Mixte du Bassin Versant de l'Austreberthe et du Saffimbec</p>
 <p>213 ancienne route de Villers</p>
