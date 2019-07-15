@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Link, Route, Redirect, Switch } from 'react-router-dom'
 import Spinner from 'react-spinner'
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -21,6 +23,24 @@ import Upload from './components/upload/Upload'
 import Credits from './components/credits/Credits'
 //import Contact from './components/contact/Contact'
 import Manager from './components/manager/Manager'
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Lato',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
+});
 
 // styles
 const navItemStyle = {
@@ -142,11 +162,13 @@ export default class App extends Component {
       token === undefined ?
         <Spinner /> :
         <Router>
-          <>
-            <Header title="Les inondations de l'Austreberthe" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
-            <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
-            <Main routes={routes} token={token} login={this.login} />
-          </>
+          <MuiThemeProvider theme={theme}>
+            <>
+              <Header title="Les inondations de l'Austreberthe" handleToggleMenu={this.handleToggleMenu} logout={this.logout} token={token} />
+              <Sidebar routes={routes} open={open} handleToggleMenu={this.handleToggleMenu} />
+              <Main routes={routes} token={token} login={this.login} />
+            </>
+          </MuiThemeProvider>
         </Router>
     )
   }
