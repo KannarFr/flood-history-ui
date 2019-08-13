@@ -42,7 +42,7 @@ class EditableViewer extends Component {
 
   render = () => {
     const { open } = this.state
-    const { id, label, url, lat, lng, date, providerContact, providerFirstName, providerLastName, status, hideViewer } = this.props
+    const { id, label, type, url, lat, lng, date, providerContact, providerFirstName, providerLastName, status, hideViewer } = this.props
 
     return (
       <Dialog
@@ -62,7 +62,12 @@ class EditableViewer extends Component {
           <Typography style={{textAlign: "left", margin: 0}}>Nom : {providerLastName}</Typography>
         </DialogTitle>
         <DialogContent style={{textAlign: "right"}}>
-          <img height="100%" src={url} alt={label} />
+          {type.includes("video") ?
+            <video controls class={"zoom"}>
+              <source src={url} type={type} alt={label}/>
+            </video>
+            : <img  height="100%" src={url} alt={label} />
+          }
         </DialogContent>
         <DialogActions>
           { status !== "VALIDATED" ?
