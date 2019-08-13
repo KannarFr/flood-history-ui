@@ -64,13 +64,15 @@ class Viewer2 extends Component {
         {value >= 0 ?
           <TabContainer>
             <h1 style={{textAlign: "center"}}>{resources[value].label}</h1>
+            <div style={{textAlign: "center"}}>
             {resources[value].type.includes("video") ?
-              <video controls class={"zoom"} >
+              <video controls class={"zoom"}>
                 <source src={resources[value].url} type={resources[value].type} alt={resources[value].label}/>
               </video>
               : <img class={"zoom"} src={resources[value].url} alt={resources[value].label} onClick={() => this.showZoom()} />
             }
             <p>{resources[value].description}</p>
+            </div>
           </TabContainer>
         : null}
         <Dialog
