@@ -287,6 +287,7 @@ class Upload extends Component {
                     <div>
                     {activeStep === steps.length - 1 ?
                       <>
+                        <p>Formats photos autorisés : JPG et PNG - Format vidéos autorisé : MP4</p>
                         <p>En envoyant ces photos, j’autorise le SMBVAS à diffuser et reproduire, sans rétributions, la/les photos transmises, à des fins non commerciales, dans le cadre de ses actions.</p>
                         <Button
                           variant="contained"
