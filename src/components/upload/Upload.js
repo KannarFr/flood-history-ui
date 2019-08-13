@@ -41,7 +41,7 @@ const styles = theme => ({
 function getSteps() {
   return [
     'Informations sur la ressource à envoyer (* : champ obligatoire)',
-    'Fichier à envoyer'
+    'Fichier à envoyer (formats supportés : jpeg, pnj, mp4)'
   ]
 }
 
@@ -287,7 +287,7 @@ class Upload extends Component {
                     <div>
                     {activeStep === steps.length - 1 ?
                       <>
-                        <p>Formats photos autorisés : JPG et PNG - Format vidéos autorisé : MP4</p>
+                        <p>Taille maximum du fichier : 50Mo, si votre fichier dépasse la taille maximale, contactez-nous à <a href="mailto:secretariat@smbas.fr">secretariat@smbas.fr</a>.</p>
                         <p>En envoyant ces photos, j’autorise le SMBVAS à diffuser et reproduire, sans rétributions, la/les photos transmises, à des fins non commerciales, dans le cadre de ses actions.</p>
                         <Button
                           variant="contained"
