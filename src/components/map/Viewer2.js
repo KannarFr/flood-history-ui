@@ -47,7 +47,6 @@ class Viewer2 extends Component {
   render() {
     const { resources } = this.props;
     const { value, open } = this.state;
-
     return (
       <>
         <Tabs
@@ -65,8 +64,13 @@ class Viewer2 extends Component {
         {value >= 0 ?
           <TabContainer>
             <h1 style={{textAlign: "center"}}>{resources[value].label}</h1>
-            <img class={"zoom"} src={resources[value].url} alt={resources[value].label} onClick={() => this.showZoom()} />
-            {resources[value].description}
+            {resources[value].type.includes("video") ?
+              <video controls class={"zoom"} >
+                <source src={resources[value].url} type={resources[value].type} alt={resources[value].label}/>
+              </video>
+              : <img class={"zoom"} src={resources[value].url} alt={resources[value].label} onClick={() => this.showZoom()} />
+            }
+            <p>{resources[value].description}</p>
           </TabContainer>
         : null}
         <Dialog
