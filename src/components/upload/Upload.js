@@ -287,7 +287,7 @@ class Upload extends Component {
                     <div>
                     {activeStep === steps.length - 1 ?
                       <>
-                        <p>Taille maximum du fichier : 50Mo, si votre fichier dépasse la taille maximale, contactez-nous à <a href="mailto:secretariat@smbas.fr">secretariat@smbas.fr</a>.</p>
+                        <p>Taille maximum du fichier : 50Mo, si votre fichier dépasse la taille maximale, contactez-nous à <a href="mailto:secretariat@smbvas.fr">secretariat@smbvas.fr</a>.</p>
                         <p>En envoyant ces photos/vidéos, j’autorise le SMBVAS à diffuser et reproduire, sans rétributions, la/les photos/vidéos transmises, à des fins non commerciales, dans le cadre de ses actions.</p>
                         <Button
                           variant="contained"
