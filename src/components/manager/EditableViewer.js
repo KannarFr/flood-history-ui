@@ -23,8 +23,9 @@ class EditableViewer extends Component {
       method: 'PATCH',
       headers: headers
     }).then(res => {
-      return res.json()
-    })
+      this.props.hideViewer();
+      return res.json();
+    });
   }
 
   unvalidate = (id) => {
@@ -36,8 +37,9 @@ class EditableViewer extends Component {
       method: 'PATCH',
       headers: headers
     }).then(res => {
-      return res.json()
-    })
+      this.props.hideViewer();
+      return res.json();
+    });
   }
 
   render = () => {
