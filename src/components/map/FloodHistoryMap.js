@@ -67,7 +67,7 @@ class FloodHistoryMap extends Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {resourcesGroupedByCoordinates ? resourcesGroupedByCoordinates.map((resources, index) =>
-            <Marker key={index} position={[resources[0].lat, resources[0].lng]} onClick={() => this.handleMarkerClick(resources)} />
+            resources[0].lat && resources[0].lng && <Marker key={index} position={[resources[0].lat, resources[0].lng]} onClick={() => this.handleMarkerClick(resources)} />
           ) : null}
           <WrappedLeafletZoomIndicator head='zoom:' position='topright' />
           <WrappedLeafletSearchIndicator
