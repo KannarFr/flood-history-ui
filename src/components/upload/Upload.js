@@ -84,6 +84,7 @@ function getStepContent(step, classes, handleChange, resourceDate) {
               disableFuture={true}
               margin="normal"
               label="Date de l'inondation"
+              defaultValue={new Date()}
               onChange={(date) => handleChange('date', date)}
               value={resourceDate}
               variant="outlined"

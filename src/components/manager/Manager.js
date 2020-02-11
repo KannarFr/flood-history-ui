@@ -143,7 +143,22 @@ class Manager extends React.Component {
   };
 
   handleViewerClick = (resource) => this.setState({ resourceToShow: resource })
-  hideViewer = () => this.setState({ resourceToShow: null })
+  hideViewer = () => {
+    var authHeader = new Headers();
+    authHeader.append("X-Token", sessionStorage.getItem("token"));
+
+    fetch(process.env.REACT_APP_SMBVAS_API_URL + 'resources', {
+      method: 'GET',
+      headers: authHeader
+    }).then(res => {
+      return res.json()
+    }).then(resources => {
+      this.setState({
+        resources: resources,
+        resourceToShow: null,
+      })
+    })
+  }
 
   render() {
     const { classes } = this.props;

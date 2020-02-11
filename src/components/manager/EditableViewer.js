@@ -24,7 +24,6 @@ class EditableViewer extends Component {
       headers: headers
     }).then(res => {
       this.props.hideViewer();
-      return res.json();
     });
   }
 
@@ -38,7 +37,6 @@ class EditableViewer extends Component {
       headers: headers
     }).then(res => {
       this.props.hideViewer();
-      return res.json();
     });
   }
 
