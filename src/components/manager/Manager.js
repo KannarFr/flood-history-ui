@@ -175,8 +175,10 @@ class Manager extends React.Component {
                         <TableCell>{n.label}</TableCell>
                         <TableCell>{n.type}</TableCell>
                         <TableCell>{n.status}</TableCell>
-                        <TableCell>{n.creationDate}</TableCell>
-                        <TableCell>{n.editionDate}</TableCell>
+                        <TableCell>{new Intl.DateTimeFormat('fr-FR').format(Date.parse(n.creationDate.substring(0, n.creationDate.length - 5)))}</TableCell>
+                        {n.editionDate ?
+                          <TableCell>{new Intl.DateTimeFormat('fr-FR').format(Date.parse(n.editionDate.substring(0, n.editionDate.length - 5)))}</TableCell> : <TableCell>-</TableCell>
+                        }
                       </TableRow>
                     );
                   })}
