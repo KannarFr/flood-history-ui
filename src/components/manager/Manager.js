@@ -162,7 +162,7 @@ class Manager extends React.Component {
                 rowCount={resources.length}
               />
               <TableBody>
-                {stableSort(resources, getSorting(order, orderBy))
+                {resources.sort((a, b) => a.creationDate < b.creationDate)
                   .map(n => {
                     return (
                       <TableRow
